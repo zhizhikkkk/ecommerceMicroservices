@@ -1,0 +1,57 @@
+########################################
+#  📦  .NET / Visual Studio / VS Code  #
+########################################
+
+# IDE-кеши и метаданные
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider / ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Построенные артефакты
+bin/
+obj/
+out/
+TestResults/
+*.log
+
+# Файловый индекс VS (ваша ошибка Permission denied)
+**/FileContentIndex/*.vsidx
+
+# NuGet / пакеты
+packages/
+*.nupkg
+.nuget/
+
+# Отчёты покрытия, профилировщики
+*.coverage
+*.coveragexml
+*.coverlet.json
+*.vsp
+*.vspx
+
+# Секреты и локальные конфиги
+appsettings.*.json
+secrets.json
+*.pfx
+*.key
+*.cer
+.env
+
+# Node / фронт, если есть
+node_modules/
+wwwroot/lib/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
