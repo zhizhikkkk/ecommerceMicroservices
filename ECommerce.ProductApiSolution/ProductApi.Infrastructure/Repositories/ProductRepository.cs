@@ -118,7 +118,8 @@ namespace ProductApi.Infrastructure.Repositories
                 {
                     return new Response(false, "Error occured retrieving product");
                 }
-                context.Entry(entity).State = EntityState.Modified;
+                context.Entry(entity).State = EntityState.Detached;
+                context.Products.Update(entity);
                 await context.SaveChangesAsync();
                 return new Response(true, $"{entity.Name} updated successfully");
             }
