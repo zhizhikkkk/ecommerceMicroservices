@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using eCommerce.SharedLibrary.Middleware;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -7,9 +9,9 @@ namespace eCommerce.SharedLibrary.DependencyInjection
 {
     public static class SharedServiceContainer
     {
-        public static IServiceCollection AddSharedServices<TContext>(this IServiceCollection services, IConfiguration config, string fileName) where TContext: DbContext
+        public static IServiceCollection AddSharedServices<TContext>(this IServiceCollection services, IConfiguration config, string fileName) where TContext : DbContext
         {
-            services.AddDbContext<TContext>(option=>option.UseSqlServer(
+            services.AddDbContext<TContext>(option => option.UseSqlServer(
                 config.GetConnectionString("eCommerceConnection"), sqlserverOption =>
                 sqlserverOption.EnableRetryOnFailure()));
 
@@ -25,6 +27,16 @@ namespace eCommerce.SharedLibrary.DependencyInjection
 
             JWTAuthentificationScheme.AddJWTAuthentificationScheme(services, config);
             return services;
+        }
+
+
+        public static IApplicationBuilder UseSharedPolicies(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<GlobalException>();
+
+            //app.UseMiddleware<ListenToOnlyApiGateway>();
+
+            return app;
         }
     }
 }
